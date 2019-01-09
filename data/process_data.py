@@ -24,10 +24,10 @@ def clean_data(df):
     for column in categories:
     # set each value to be the last character of the string
     # convert column from string to numeric
-        categories[column] = categories[column].apply(lambda x:x[-1])
+        categories[column] = categories[column].apply(lambda x:int(x[-1]))
     
-    df = pd.concat([df, categories], axis=1)
     df.drop('categories', axis=1, inplace=True)
+    df = pd.concat([df, categories], axis=1)
     df.drop('child_alone',axis=1, inplace=True)
     df = df[df['related']!=2]
     df.drop_duplicates(inplace=True)
