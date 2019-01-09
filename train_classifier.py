@@ -30,9 +30,6 @@ def load_data(database_filepath):
     df = pd.read_sql_table('Table', engine, index_col='id')
     X = df['message']
     y = df.drop(['message', 'original','genre'],axis=1)
-    df.to_csv('df.csv')
-    X.to_csv('X.csv')
-    y.to_csv('y.csv')
     return X, y, y.columns
 
 def tokenize(text):
@@ -60,7 +57,7 @@ def evaluate_model(model, X_test, Y_test, category_names):
     print('Precision: {}\nRecall: {}\nFscore: {}'.format(precision,recall,fscore))
 
 def save_model(model, model_filepath):
-    pickle.dump(model, open('best_model.sav', 'wb'))
+    pickle.dump(model, open(model_filepath, 'wb'))
 
 def main():
     if len(sys.argv) == 3:
